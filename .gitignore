@@ -1,0 +1,7 @@
+packages
+Debug
+obj
+Release
+.vs
+*.user
+*.suo
