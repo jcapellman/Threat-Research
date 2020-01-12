@@ -56,15 +56,17 @@ namespace SieProcessHollower.lib.Helpers
             return processes.FirstOrDefault(a => a.ProcessName == processName);
         }
 
-        public static PROCESS_INFORMATION StartSuspendedProcess(string path)
+        public static PROCESS_INFORMATION StartSuspendedProcess(string fileName)
         {
-            STARTUPINFO startInfo = new STARTUPINFO();
-            PROCESS_INFORMATION procInfo = new PROCESS_INFORMATION();
+            var startInfo = new STARTUPINFO();
 
-            uint flags = CreateSuspended | DetachedProcess | CreateNoWindow;
+            const uint flags = CreateSuspended | DetachedProcess | CreateNoWindow;
 
-            if (!CreateProcess((IntPtr)0, path, (IntPtr)0, (IntPtr)0, true, flags, (IntPtr)0, (IntPtr)0, ref startInfo, out procInfo))
-                throw new SystemException("[x] Failed to create process!");
+            if (!CreateProcess((IntPtr) 0, fileName, (IntPtr) 0, (IntPtr) 0, true, flags, (IntPtr) 0, (IntPtr) 0,
+                ref startInfo, out var procInfo))
+            {
+                throw new SystemException($"Failed to create process ({fileName}) in a suspended state...");
+            }
 
             return procInfo;
         }
