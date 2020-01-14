@@ -14,6 +14,7 @@ namespace SieProcessHollower.lib
             Console.WriteLine($"Suspended {container.SourceFileName} successfully...");
 
             // TODO: Remap shell code into target process
+            // TODO: Read map on the fly
 
             ProcessHelper.CloseProcessHandles(sourceProcessInfo);
 
