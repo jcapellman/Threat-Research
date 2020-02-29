@@ -54,6 +54,14 @@ END
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "app.ico"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// JPG
+//
+
+IDR_JPG1                JPG                     "bg.jpg"
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
