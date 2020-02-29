@@ -7,6 +7,7 @@
 #include <tchar.h>
 
 #pragma comment (lib, "Shell32")
+#pragma comment(lib, "user32.lib")
 
 constexpr auto INTERVAL_MS = 60000;
 constexpr auto URL = L"http://www.taylorswift.com";
