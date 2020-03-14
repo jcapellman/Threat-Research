@@ -7,6 +7,14 @@
     <StartupObject />
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IlcInvariantGlobalization>true</IlcInvariantGlobalization>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+    <IlcOptimizationPreference>Size</IlcOptimizationPreference>
+    <IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
+    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="bg.jpg" />
     <None Remove="bg.mid" />
@@ -20,5 +28,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-28712-01" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>
