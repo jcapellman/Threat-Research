@@ -5,4 +5,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Template.csl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Template.csl" />
+  </ItemGroup>
+
 </Project>

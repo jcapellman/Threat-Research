@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reflection;
+using System.IO;
 
 namespace EEM
 {
@@ -7,11 +7,25 @@ namespace EEM
     {
         static void Main(string[] args)
         {
-            var bytes = new byte[0];
+            if (args.Length == 0)
+            {
+                Console.WriteLine("No file specified to embed");
+
+                return;
+            }
+
+            if (!File.Exists(args[0]))
+            {
+                Console.WriteLine($"Could not find {args[0]} file");
+
+                return;
+            }
+
+            var embedBytes = File.ReadAllBytes(args[0]);
             
-            var assembly = AppDomain.Load(bytes);
-            Type typeToExecute = assembly.GetType("Program");
-            Object instance = Activator.CreateInstance(typeToExecute);
+            // TODO: Encrypt bytes
+            // TODO: Run template
+            // TODO: Compile binary
         }
     }
 }
