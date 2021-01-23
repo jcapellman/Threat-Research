@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 
 namespace EEM
 {
@@ -7,11 +8,17 @@ namespace EEM
     {
         static void Main(string[] args)
         {
-            var bytes = new byte[0];
-            
-            var assembly = AppDomain.Load(bytes);
+            var base64Str = "{BASE64STRING}";
+
+            var bytes = Encoding.ASCII.GetBytes(base64Str);
+
+            var assembly = Assembly.Load(bytes);
             Type typeToExecute = assembly.GetType("Program");
-            Object instance = Activator.CreateInstance(typeToExecute);
+            object instance = Activator.CreateInstance(typeToExecute);
+
+            var mainMethod = typeToExecute.GetMethod("Main");
+
+            mainMethod.Invoke(instance, new object[0] {});
             
         }
     }

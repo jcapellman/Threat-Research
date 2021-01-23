@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Text;
 
 namespace EEM.EmbedTestApp
 {
@@ -7,6 +9,7 @@ namespace EEM.EmbedTestApp
         static void Main(string[] args)
         {
             Console.WriteLine("Running from within the binary");
+
         }
     }
 }
