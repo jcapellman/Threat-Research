@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DEOS": {
+      "commandName": "Project",
+      "commandLineArgs": "DEOS.Test.dll"
+    }
+  }
+}
