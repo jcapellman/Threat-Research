@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -79,6 +80,8 @@ namespace EEM
             var templateString = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Template.csl"));
 
             templateString = templateString.Replace("{BASE64STRING}", base64String);
+
+            File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "gen", "source.cs"), templateString);
 
             var compiledBytes = CompileCodeToBytes(templateString);
             
