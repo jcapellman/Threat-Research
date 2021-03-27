@@ -23,26 +23,24 @@ namespace MOTRA
         {
             var analysis = new List<string>();
 
-            using (var stream = File.OpenRead(fileName))
+            using var stream = File.OpenRead(fileName);
+
+            try
             {
-                try
-                {
-                    using (SpreadsheetDocument spreadsheet = SpreadsheetDocument.Open(stream, false))
-                    {
-                        analysis.Add(ParsePart<MacroSheetPart>(spreadsheet, "Macros"));
-                        analysis.Add(ParsePart<ConnectionsPart>(spreadsheet, "External Connections"));
-                        analysis.Add(ParsePart<VbaProjectPart>(spreadsheet, "VBA Project"));
-                        analysis.Add(ParsePart<EmbeddedObjectPart>(spreadsheet, "Embedded Objects"));
-                        analysis.Add(ParsePart<ImagePart>(spreadsheet, "Images"));
-                        analysis.Add(ParsePart<CustomDataPart>(spreadsheet, "Custom Data"));
-                        analysis.Add(ParsePart<VbaDataPart>(spreadsheet, "VBA Data"));
-                        analysis.Add(ParsePart<VmlDrawingPart>(spreadsheet, "VML Drawing"));
-                    }
-                }
-                catch (OpenXmlPackageException)
-                {
-                    analysis.Add("File is not a Modern Excel Document");
-                }
+                using var spreadsheet = SpreadsheetDocument.Open(stream, false);
+
+                analysis.Add(ParsePart<MacroSheetPart>(spreadsheet, "Macros"));
+                analysis.Add(ParsePart<ConnectionsPart>(spreadsheet, "External Connections"));
+                analysis.Add(ParsePart<VbaProjectPart>(spreadsheet, "VBA Project"));
+                analysis.Add(ParsePart<EmbeddedObjectPart>(spreadsheet, "Embedded Objects"));
+                analysis.Add(ParsePart<ImagePart>(spreadsheet, "Images"));
+                analysis.Add(ParsePart<CustomDataPart>(spreadsheet, "Custom Data"));
+                analysis.Add(ParsePart<VbaDataPart>(spreadsheet, "VBA Data"));
+                analysis.Add(ParsePart<VmlDrawingPart>(spreadsheet, "VML Drawing"));
+            }
+            catch (OpenXmlPackageException)
+            {
+                analysis.Add("File is not a Modern Excel Document");
             }
 
             return analysis;
