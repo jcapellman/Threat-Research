@@ -1,49 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using DocumentFormat.OpenXml.Packaging;
+using MOTRA.Analyzers.Base;
 
 namespace MOTRA
 {
     public class MotraAnalyzer
     {
-        private static string ParsePart<T>(SpreadsheetDocument document, string name) where T : OpenXmlPart
+        private readonly List<BaseAnalyzer> _analyzers;
+
+        public MotraAnalyzer()
         {
-            var parts = document.WorkbookPart.WorksheetParts.Sum(a => a.GetPartsOfType<T>().Count());
-
-            // TODO: Output elements instead of just the count
-
-            return parts > 0
-                ? $"{name} - {parts} were found"
-                : $"{name} - None were found";
+            _analyzers = typeof(MotraAnalyzer).Assembly.GetTypes()
+                .Where(a => a.BaseType == typeof(BaseAnalyzer) && !a.IsAbstract)
+                .Select(b => (BaseAnalyzer) Activator.CreateInstance(b)).ToList();
         }
 
         public List<string> Analyze(string fileName)
         {
-            var analysis = new List<string>();
-
             using var stream = File.OpenRead(fileName);
 
-            try
+            foreach (var analyzer in _analyzers)
             {
-                using var spreadsheet = SpreadsheetDocument.Open(stream, false);
-
-                analysis.Add(ParsePart<MacroSheetPart>(spreadsheet, "Macros"));
-                analysis.Add(ParsePart<ConnectionsPart>(spreadsheet, "External Connections"));
-                analysis.Add(ParsePart<VbaProjectPart>(spreadsheet, "VBA Project"));
-                analysis.Add(ParsePart<EmbeddedObjectPart>(spreadsheet, "Embedded Objects"));
-                analysis.Add(ParsePart<ImagePart>(spreadsheet, "Images"));
-                analysis.Add(ParsePart<CustomDataPart>(spreadsheet, "Custom Data"));
-                analysis.Add(ParsePart<VbaDataPart>(spreadsheet, "VBA Data"));
-                analysis.Add(ParsePart<VmlDrawingPart>(spreadsheet, "VML Drawing"));
-            }
-            catch (OpenXmlPackageException)
-            {
-                analysis.Add("File is not a Modern Excel Document");
+                try
+                {
+                    return analyzer.Analyze(stream);
+                }
+                catch (Exception)
+                {
+                    // Assume it just wasn't the proper type
+                }
             }
 
-            return analysis;
+            return new List<string> {$"No Analyzer available to parse {fileName}"};
         }
     }
 }
