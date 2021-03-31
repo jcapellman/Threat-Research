@@ -12,15 +12,23 @@ namespace MOTRA.Analyzers
 {
     public class ExcelAnalyzer : BaseAnalyzer
     {
-        private static string ParsePart<T>(SpreadsheetDocument document, string name) where T : OpenXmlPart
+        private Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
+
+        private static List<string> ParsePart<T>(SpreadsheetDocument document) where T : OpenXmlPart
         {
-            var parts = document.WorkbookPart.WorksheetParts.Sum(a => a.GetPartsOfType<T>().Count());
+            var parts = new List<T>();
+        
+            foreach (var worksheet in document.WorkbookPart.WorksheetParts)
+            {
+                var sheetParts = worksheet?.GetPartsOfType<T>().ToList();
 
-            // TODO: Output elements instead of just the count
-
-            return parts > 0
-                ? $"{name} - {parts} were found"
-                : $"{name} - None were found";
+                if (sheetParts != null)
+                {
+                    parts.AddRange(sheetParts);
+                }
+            }
+            
+            return parts.Select(a => a.Uri.ToString()).ToList();
         }
 
         protected static List<string> GetURLsFromString(string str)
@@ -88,33 +96,38 @@ namespace MOTRA.Analyzers
             return urls;
         }
 
-        public override List<string> Analyze(Stream fileStream)
+        private void AddResult<T>(SpreadsheetDocument document, string name) where T: OpenXmlPart
         {
-            var analysis = new List<string>();
+            var result = ParsePart<T>(document);
             
+            results.Add(name, result);
+        }
+
+        public override Dictionary<string, List<string>> Analyze(Stream fileStream)
+        {
             try
             {
                 using var spreadsheet = SpreadsheetDocument.Open(fileStream, false);
 
-                analysis.Add(ParsePart<MacroSheetPart>(spreadsheet, "Macros"));
-                analysis.Add(ParsePart<ConnectionsPart>(spreadsheet, "External Connections"));
-                analysis.Add(ParsePart<VbaProjectPart>(spreadsheet, "VBA Project"));
-                analysis.Add(ParsePart<EmbeddedObjectPart>(spreadsheet, "Embedded Objects"));
-                analysis.Add(ParsePart<ImagePart>(spreadsheet, "Images"));
-                analysis.Add(ParsePart<CustomDataPart>(spreadsheet, "Custom Data"));
-                analysis.Add(ParsePart<VbaDataPart>(spreadsheet, "VBA Data"));
-                analysis.Add(ParsePart<VmlDrawingPart>(spreadsheet, "VML Drawing"));
-
+                AddResult<MacroSheetPart>(spreadsheet, "Macros");
+                AddResult<ConnectionsPart>(spreadsheet, "External Connections");
+                AddResult<VbaProjectPart>(spreadsheet, "VBA Project");
+                AddResult<EmbeddedObjectPart>(spreadsheet, "Embedded Objects");
+                AddResult<ImagePart>(spreadsheet, "Images");
+                AddResult<CustomDataPart>(spreadsheet, "Custom Data");
+                AddResult<VbaDataPart>(spreadsheet, "VBA Data");
+                AddResult<VmlDrawingPart>(spreadsheet, "VML Drawing");
+                
                 var urls = GetUrls(spreadsheet);
 
-                analysis.Add(urls.Any() ? $"URLS - {urls.Count} were found ({string.Join(", ", urls)})" : "URLS - None were found");
+                results.Add("Cell URLS", urls);
             }
             catch (OpenXmlPackageException)
             {
-                analysis.Add("File is not a Modern Excel Document");
+                results.Add("Error", new List<string> { "File is not a Modern Excel Document"});
             }
 
-            return analysis;
+            return results;
         }
     }
 }
