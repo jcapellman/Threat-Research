@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace MOTRA
 {
@@ -18,13 +19,9 @@ namespace MOTRA
 
             var analysis = new MotraAnalyzer().Analyze(args[0]);
 
-            var x = 1;
-
-            foreach (var line in analysis)
+            foreach (var key in analysis.Keys)
             {
-                Console.WriteLine($"{x}.{line}");
-
-                x++;
+                Console.WriteLine($"{key} - {(analysis[key].Any() ? string.Join(", ", analysis[key]) : "none found")}");
             }
         }
     }

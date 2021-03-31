@@ -18,7 +18,7 @@ namespace MOTRA
                 .Select(b => (BaseAnalyzer) Activator.CreateInstance(b)).ToList();
         }
 
-        public List<string> Analyze(string fileName)
+        public Dictionary<string, List<string>> Analyze(string fileName)
         {
             using var stream = File.OpenRead(fileName);
 
@@ -34,7 +34,7 @@ namespace MOTRA
                 }
             }
 
-            return new List<string> {$"No Analyzer available to parse {fileName}"};
+            return null;
         }
     }
 }
