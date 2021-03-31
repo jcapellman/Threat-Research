@@ -9,6 +9,6 @@ namespace MOTRA.Analyzers.Base
     {
         protected abstract List<string> GetUrls(OpenXmlPackage package);
 
-        public abstract List<string> Analyze(Stream fileStream);
+        public abstract Dictionary<string, List<string>> Analyze(Stream fileStream);
     }
 }
