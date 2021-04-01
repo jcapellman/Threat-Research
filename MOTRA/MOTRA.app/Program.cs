@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 
+using MOTRA.lib;
+
 namespace MOTRA
 {
     class Program

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.218
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOTRA", "MOTRA.csproj", "{132ECCA6-2FBA-4BF7-9AE1-3678FD09E8FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOTRA.app", "MOTRA.app\MOTRA.app.csproj", "{132ECCA6-2FBA-4BF7-9AE1-3678FD09E8FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOTRA.lib", "MOTRA.lib\MOTRA.lib.csproj", "{0B1F8C9D-DF36-429D-A6D8-17A1042CD6DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{132ECCA6-2FBA-4BF7-9AE1-3678FD09E8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{132ECCA6-2FBA-4BF7-9AE1-3678FD09E8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{132ECCA6-2FBA-4BF7-9AE1-3678FD09E8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1F8C9D-DF36-429D-A6D8-17A1042CD6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1F8C9D-DF36-429D-A6D8-17A1042CD6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1F8C9D-DF36-429D-A6D8-17A1042CD6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1F8C9D-DF36-429D-A6D8-17A1042CD6DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using MOTRA.Analyzers.Base;
+using MOTRA.lib.Analyzers.Base;
 
-namespace MOTRA
+namespace MOTRA.lib
 {
     public class MotraAnalyzer
     {

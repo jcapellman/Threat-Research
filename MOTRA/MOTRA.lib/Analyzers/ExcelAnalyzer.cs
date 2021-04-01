@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-using MOTRA.Analyzers.Base;
+using MOTRA.lib.Analyzers.Base;
 
-namespace MOTRA.Analyzers
+namespace MOTRA.lib.Analyzers
 {
     public class ExcelAnalyzer : BaseAnalyzer
     {

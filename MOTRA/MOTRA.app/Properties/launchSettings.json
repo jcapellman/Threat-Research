@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MOTRA": {
+      "commandName": "Project",
+      "commandLineArgs": "Book1.xlsx"
+    }
+  }
+}

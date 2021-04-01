@@ -3,7 +3,7 @@ using System.IO;
 
 using DocumentFormat.OpenXml.Packaging;
 
-namespace MOTRA.Analyzers.Base
+namespace MOTRA.lib.Analyzers.Base
 {
     public abstract class BaseAnalyzer
     {

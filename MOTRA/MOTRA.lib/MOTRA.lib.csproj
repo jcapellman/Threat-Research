@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Authors>Jarred Capellman</Authors>
+    <PackageId>MOTRA</PackageId>
+    <Product>MOTRA</Product>
+    <Description>Modern Office Threat Research Analyzer</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/jcapellman/Threat-Research</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jcapellman/Threat-Research</RepositoryUrl>
+    <PackageTags>threat research,modern office parsing</PackageTags>
+    <Copyright>2021 Jarred Capellman</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
