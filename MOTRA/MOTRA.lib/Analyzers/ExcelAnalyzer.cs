@@ -49,6 +49,8 @@ namespace MOTRA.lib.Analyzers
             return urls;
         }
 
+        public override string Name => "Excel";
+
         protected override List<string> GetUrls(OpenXmlPackage package)
         {
             var spreadsheet = (SpreadsheetDocument) package;

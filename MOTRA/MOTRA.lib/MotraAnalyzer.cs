@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 using MOTRA.lib.Analyzers.Base;
+using MOTRA.lib.Container;
 
 namespace MOTRA.lib
 {
@@ -18,15 +19,26 @@ namespace MOTRA.lib
                 .Select(b => (BaseAnalyzer) Activator.CreateInstance(b)).ToList();
         }
 
-        public Dictionary<string, List<string>> Analyze(string fileName)
+        public AnalysisContainer Analyze(string fileName)
         {
             using var stream = File.OpenRead(fileName);
+
+            var container = new AnalysisContainer
+            {
+                Analysis = new Dictionary<string, List<string>>(),
+                FileType = null,
+                Scannable = false
+            };
 
             foreach (var analyzer in _analyzers)
             {
                 try
                 {
-                    return analyzer.Analyze(stream);
+                    container.Scannable = true;
+                    container.FileType = analyzer.Name;
+                    container.Analysis = analyzer.Analyze(stream);
+
+                    break;
                 }
                 catch (Exception)
                 {
@@ -34,7 +46,7 @@ namespace MOTRA.lib
                 }
             }
 
-            return null;
+            return container;
         }
     }
 }

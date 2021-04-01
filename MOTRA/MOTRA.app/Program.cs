@@ -19,11 +19,20 @@ namespace MOTRA
 
             Console.WriteLine($"Analysis of {args[0]}:");
 
-            var analysis = new MotraAnalyzer().Analyze(args[0]);
+            var result = new MotraAnalyzer().Analyze(args[0]);
 
-            foreach (var key in analysis.Keys)
+            if (!result.Scannable)
             {
-                Console.WriteLine($"{key} - {(analysis[key].Any() ? string.Join(", ", analysis[key]) : "none found")}");
+                Console.WriteLine("File was not scannable");
+
+                return;
+            }
+
+            Console.WriteLine($"File classified as {result.FileType}");
+
+            foreach (var key in result.Analysis.Keys)
+            {
+                Console.WriteLine($"{key} - {(result.Analysis[key].Any() ? string.Join(", ", result.Analysis[key]) : "none found")}");
             }
         }
     }
