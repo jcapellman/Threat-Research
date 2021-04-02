@@ -21,6 +21,16 @@ namespace MOTRA.lib
 
         public AnalysisContainer Analyze(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName), "FileName argument was null");
+            }
+
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException($"File {fileName} was not found");
+            }
+
             using var stream = File.OpenRead(fileName);
 
             var container = new AnalysisContainer
