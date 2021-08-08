@@ -12,7 +12,7 @@ namespace SwiftedNet
 {
     class Program
     {
-        private const string url = "https://www.taylorswift.com";
+        private static readonly string[] urls = new[] { "https://www.taylorswift.com", "https://www.youtube.com/watch?v=3tmd-ClpJxA", "https://www.youtube.com/watch?v=e-ORhEE9VVg", "https://www.youtube.com/watch?v=VuNIsY6JdUw", "https://www.youtube.com/watch?v=w1oM3kQpXRo", "https://www.youtube.com/watch?v=FuXNumBwDOM", "https://www.youtube.com/watch?v=WA4iX5D9Z64", "https://www.youtube.com/watch?v=8xg3vE8Ie_E", "https://www.youtube.com/watch?v=wIft-t-MQuE" };
         private const int MIN_BROWSERS = 1;
         private const int MAX_BROWSERS = 20;
 
@@ -102,7 +102,7 @@ namespace SwiftedNet
             key.SetValue(@"TileWallpaper", 0.ToString());
 
             ExtractResource(resource, resource);
-            
+
             SystemParametersInfo(SPI_SETDESKWALLPAPER,
                 0,
                 Path.Combine(AppContext.BaseDirectory, resource),
@@ -127,9 +127,13 @@ namespace SwiftedNet
 
                 var numInstances = rand.Next(MIN_BROWSERS, MAX_BROWSERS);
 
+                var urlRand = new Random((int)DateTime.Now.Ticks);
+
                 for (var x = 0; x < numInstances; x++)
                 {
-                    OpenBrowser(url);
+                    var index = urlRand.Next(0, urls.Length - 1);
+
+                    OpenBrowser(urls[index]);
                 }
 
                 numInstances = rand.Next(MIN_TEXTFILES, MAX_TEXTFILES);
