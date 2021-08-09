@@ -20,11 +20,13 @@
   <ItemGroup>
     <None Remove="bg.jpg" />
     <None Remove="bg.mid" />
+    <None Remove="bg2.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="bg.jpg" />
     <EmbeddedResource Include="bg.mid" />
+    <EmbeddedResource Include="bg2.png" />
   </ItemGroup>
 
   <ItemGroup>

