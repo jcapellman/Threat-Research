@@ -21,12 +21,18 @@
     <None Remove="bg.jpg" />
     <None Remove="bg.mid" />
     <None Remove="bg2.png" />
+    <None Remove="sourceELF" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="sourceELF" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="bg.jpg" />
     <EmbeddedResource Include="bg.mid" />
     <EmbeddedResource Include="bg2.png" />
+    <EmbeddedResource Include="sourceELF" />
   </ItemGroup>
 
   <ItemGroup>
