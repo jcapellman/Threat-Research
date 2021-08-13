@@ -21,7 +21,7 @@ namespace SwiftedNet
 
         private const int DELAY_MINUTES = 1;
 
-        private static readonly string[] RESOURCE_NAMES = new[] { "bg.jpg", "bg2.png" };
+        private static readonly string[] RESOURCE_NAMES = new[] { "bg.jpg" };
 
         private const string MIDI_RESOURCE_NAME = "bg.mid";
 

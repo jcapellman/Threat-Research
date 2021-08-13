@@ -9,24 +9,29 @@
 
 <PropertyGroup>
 	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  <IlcInvariantGlobalization>true</IlcInvariantGlobalization>
+  <IlcOptimizationPreference>Size</IlcOptimizationPreference>
+  <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
 </PropertyGroup>
 
   <ItemGroup>
     <None Remove="bg.jpg" />
     <None Remove="bg.mid" />
-    <None Remove="bg2.png" />
   </ItemGroup>
 
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' != 'win-x64'">
+    <PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <EmbeddedResource Include="bg.jpg" />
     <EmbeddedResource Include="bg.mid" />
-    <EmbeddedResource Include="bg2.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="6.0.0-preview.5.21301.5" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
   </ItemGroup>
   <ItemGroup>
