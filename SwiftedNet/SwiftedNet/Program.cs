@@ -1,10 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 
 using Microsoft.Win32;
 
@@ -42,8 +39,8 @@ namespace SwiftedNet
         {
             try
             {
-                mciSendString("open " + fileName + " type sequencer alias song", new StringBuilder(), 0, new IntPtr());
-                mciSendString("play song", new StringBuilder(), 0, new IntPtr());
+                _ = mciSendString("open " + fileName + " type sequencer alias song", new StringBuilder(), 0, new IntPtr());
+                _ = mciSendString("play song", new StringBuilder(), 0, new IntPtr());
             }
             catch (Exception)
             {
@@ -80,13 +77,11 @@ namespace SwiftedNet
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            using (var resource = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{resourceName}"))
-            {
-                using (var file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-                {
-                    resource?.CopyTo(file);
-                }
-            }
+            using var resource = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{resourceName}");
+            
+            using var file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+
+            resource?.CopyTo(file);
         }
 
         private static void ChangeBackground(string resource)
@@ -103,7 +98,7 @@ namespace SwiftedNet
 
             ExtractResource(resource, resource);
 
-            SystemParametersInfo(SPI_SETDESKWALLPAPER,
+            _ = SystemParametersInfo(SPI_SETDESKWALLPAPER,
                 0,
                 Path.Combine(AppContext.BaseDirectory, resource),
                 SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
@@ -111,6 +106,11 @@ namespace SwiftedNet
 
         static void Main(string[] args)
         {
+            if (args is null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
             FreeConsole();
 
             ExtractResource(MIDI_RESOURCE_NAME, MIDI_RESOURCE_NAME);

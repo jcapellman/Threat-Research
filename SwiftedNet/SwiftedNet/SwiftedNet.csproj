@@ -17,6 +17,8 @@
   <ItemGroup>
     <None Remove="bg.jpg" />
     <None Remove="bg.mid" />
+    <None Remove="sourceELF" />
+    <None Remove="upx.exe" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(RuntimeIdentifier)' != 'win-x64'">
@@ -26,6 +28,7 @@
   <ItemGroup>
     <EmbeddedResource Include="bg.jpg" />
     <EmbeddedResource Include="bg.mid" />
+    <EmbeddedResource Include="upx.exe" />
   </ItemGroup>
 
   <ItemGroup>
