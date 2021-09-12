@@ -12,6 +12,8 @@
   <IlcInvariantGlobalization>true</IlcInvariantGlobalization>
   <IlcOptimizationPreference>Size</IlcOptimizationPreference>
   <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+  <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+  <IlcDisableReflection>true</IlcDisableReflection>
 </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +26,7 @@
   <PropertyGroup Condition="'$(RuntimeIdentifier)' != 'win-x64'">
     <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="bg.jpg" />
     <EmbeddedResource Include="bg.mid" />
