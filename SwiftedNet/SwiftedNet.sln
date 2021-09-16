@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31710.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftedNet", "SwiftedNet\SwiftedNet.csproj", "{E6ABD0B0-B4D7-4203-8905-DBDEF1960DA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftedMacho", "SwiftedMacho\SwiftedMacho.csproj", "{7F619662-383D-4806-9C89-56DA5789E1F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftedMacho", "SwiftedMacho\SwiftedMacho.csproj", "{7F619662-383D-4806-9C89-56DA5789E1F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftedELF", "SwiftedELF\SwiftedELF.csproj", "{C7247156-6370-4F36-9821-A16117F56F40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7F619662-383D-4806-9C89-56DA5789E1F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F619662-383D-4806-9C89-56DA5789E1F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F619662-383D-4806-9C89-56DA5789E1F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7247156-6370-4F36-9821-A16117F56F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7247156-6370-4F36-9821-A16117F56F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7247156-6370-4F36-9821-A16117F56F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7247156-6370-4F36-9821-A16117F56F40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
