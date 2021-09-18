@@ -50,7 +50,7 @@ namespace SwiftedMacho
 
                 for (var x = 0; x < numInstances; x++)
                 {
-                    var textFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), $"ShakeItOff_{DateTime.Now.Ticks}.txt");
+                    var textFile = Path.Combine(AppContext.BaseDirectory, $"ShakeItOff_{DateTime.Now.Ticks}.txt");
 
                     File.WriteAllText(textFile, $"Look what you made me do on {DateTime.Now}");
 
