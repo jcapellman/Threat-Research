@@ -17,6 +17,7 @@
 	  <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
 	  <InvariantGlobalization>true</InvariantGlobalization>
 	  <PublishAot>true</PublishAot>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
