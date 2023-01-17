@@ -3,22 +3,22 @@ using System.Runtime.InteropServices;
 
 namespace RuntimeBroker
 {
-    internal class Program
+    internal partial class Program
     {
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern int SystemParametersInfo(UInt32 uiAction, UInt32 uiParam, String pvParam, UInt32 fWinIni);
+        [LibraryImport("user32.dll", EntryPoint = "SystemParametersInfoW", StringMarshalling = StringMarshalling.Utf16)]
+        private static partial int SystemParametersInfo(UInt32 uiAction, UInt32 uiParam, String pvParam, UInt32 fWinIni);
 
-        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [LibraryImport("user32.dll", EntryPoint = "FindWindowA", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        private static partial IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        [DllImport("user32.dll", EntryPoint = "SendMessage", SetLastError = true)]
-        static extern IntPtr SendMessage(IntPtr hWnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
+        [LibraryImport("user32.dll", EntryPoint = "SendMessageA", SetLastError = true)]
+        private static partial IntPtr SendMessage(IntPtr hWnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowPos", SetLastError = true)]
+        private static partial int SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
 
-        [DllImport("user32.dll")]
-        private static extern int ShowCursor(bool bShow);
+        [LibraryImport("user32.dll", EntryPoint = "ShowCursor")]
+        private static partial int ShowCursor([MarshalAs(UnmanagedType.Bool)] bool bShow);
 
         private static readonly uint SPI_SETDESKWALLPAPER = 20;
         private static readonly uint SPIF_UPDATEINIFILE = 0x1;
