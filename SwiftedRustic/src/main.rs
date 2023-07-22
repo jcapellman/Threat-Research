@@ -1,6 +1,24 @@
 use std::env;
 
-pub use crate::swifto;
+pub mod swifto {
+	pub fn swift(delay: i16) -> i16 {
+		println!("{}", delay);
+
+        return delay
+	}
+}
+
+use crate::swifto::swift;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn swift_pass_in_number() {
+        assert_eq!(5, swift(5));
+    }
+}
 
 fn parse(args: Vec<String>) -> i16 {
     if args.len() == 1 {
@@ -15,7 +33,7 @@ fn parse(args: Vec<String>) -> i16 {
 }
 
 fn main() {
-    let delaySeconds: i16 = parse(env::args().collect());
+    let delay_seconds: i16 = parse(env::args().collect());
 
-    swift(delaySeconds);
+    swift(delay_seconds);
 }
