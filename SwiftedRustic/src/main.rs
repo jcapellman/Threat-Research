@@ -1,4 +1,8 @@
 use std::env;
+use windows::{
+    core::*, Data::Xml::Dom::*, Win32::Foundation::*, Win32::System::Threading::*,
+    Win32::UI::WindowsAndMessaging::*,
+};
 
 pub mod swifto {
 	pub fn swift(delay: i16) -> i16 {
